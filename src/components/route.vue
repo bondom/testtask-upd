@@ -1,22 +1,25 @@
 <template>
-	<div>
-		<li><a href="#" v-on:click="$emit('draw')"><slot></slot></a></li>
-	</div>
+    <div>
+        <li>
+            <a @click="createRouteInMap">
+                {{route.title}}
+            </a>
+        </li>
+    </div>
 </template>
-
 <script>
-export default{
-	data(){
-		return{
-		
-		}
-	}
-}
-	
+    export default{
+        props: ['route'],
+        methods: {
+            createRouteInMap(){
+                Event.$emit('createRouteInMap', this.route)
+            }
+        }
+    }
 </script>
 <style>
-	li{
-		display: inline-block;
-		margin-right:10px;
-	}
+    li {
+        display: inline-block;
+        margin-right: 10px;
+    }
 </style>

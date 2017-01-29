@@ -35,18 +35,20 @@
                     });
             },
             createRoutes(from){
-                this.routes = this.cities.map(to => {
-                    return {
-                        title: `C ${from.title} В ${to.title}`,
-                        from: {
-                            lat: from.lat,
-                            lng: from.lng
-                        },
-                        to: {
-                            lat: to.lat,
-                            lng: to.lng
+                this.routes = this.cities
+                    .filter(to => from.title!=to.title)
+                    .map(to => {
+                        return {
+                            title: `C ${from.title} В ${to.title}`,
+                            from: {
+                                lat: from.lat,
+                                lng: from.lng
+                            },
+                            to: {
+                                lat: to.lat,
+                                lng: to.lng
+                            }
                         }
-                    }
                 });
                 this.selectRoute("");
             },

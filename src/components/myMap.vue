@@ -16,7 +16,7 @@
         },
         created(){
             Event.$on('createRouteInMap', (route) => this.createRoute(route));
-            Event.$on('eraseRoutesFromMap', () => this.eraseRoutesFromMap());
+            Event.$on('eraseRoutesFromMap', () => this.renderDirection({routes:[]}));
         },
         methods: {
             initMap() {
@@ -38,9 +38,6 @@
             },
             renderDirection(direction){
                 this.directionsRenderer.setDirections(direction);
-            },
-            eraseRoutesFromMap(){
-                this.directionsRenderer.setDirections({routes:[]});  
             }
         }
     }

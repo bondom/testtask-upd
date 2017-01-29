@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="routes">
         <route v-for="route in routes" :route="route"></route>
     </div>
 </template>
@@ -18,7 +18,8 @@
             this.prepareComponent();
         },
         created(){
-            Event.$on('autocompliteAddress', (address) => this.createRoutes(address))
+            Event.$on('autocompliteAddress', (address) => this.createRoutes(address));
+            Event.$on('selectRoute', (title) => this.selectRoute(title));
         },
         methods: {
             prepareComponent() {
@@ -42,19 +43,22 @@
                             lng: from.lng
                         },
                         to: {
-                            lat: from.lat,
-                            lng: from.lng
+                            lat: to.lat,
+                            lng: to.lng
                         }
                     }
                 });
+            },
+            selectRoute(title){
+                this.$children.forEach(routeEl=>{
+                    routeEl.isSelected = (title==routeEl.route.title)?true:false;
+                })
             }
         }
     }
-
 </script>
 <style>
-    .borderedRoute {
-        border: 1px solid blue;
-        background-color: blue;
+    .routes{
+        margin:10px 0px 20px 0px;
     }
 </style>

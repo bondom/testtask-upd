@@ -37,7 +37,7 @@
             createRoutes(from){
                 this.routes = this.cities.map(to => {
                     return {
-                        title: 'C ' + from.title + ' В ' + to.title,
+                        title: `C ${from.title} В ${to.title}`,
                         from: {
                             lat: from.lat,
                             lng: from.lng

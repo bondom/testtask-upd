@@ -2,7 +2,7 @@
     <div id="app">
         <autocomplete id="departure"></autocomplete>
         <route-list></route-list>
-        <my-map id="departure"></my-map>
+        <my-map id="map"></my-map>
     </div>
 </template>
 

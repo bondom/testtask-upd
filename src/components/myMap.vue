@@ -7,14 +7,16 @@
         data(){
             return {
                 map: null,
-                directionsService: null
+                directionsService: null,
+                directionsRenderer:null
             }
         },
-        mounted: function () {
+        mounted(){
             this.initMap();
         },
         created(){
-            Event.$on('createRouteInMap', (route) => this.createRoute(route))
+            Event.$on('createRouteInMap', (route) => this.createRoute(route));
+            Event.$on('eraseRoutesFromMap', () => this.eraseRoutesFromMap());
         },
         methods: {
             initMap() {
@@ -24,19 +26,21 @@
                     zoom: 8
                 });
                 this.directionsService = new google.maps.DirectionsService();
+                this.directionsRenderer = new google.maps.DirectionsRenderer();
+                this.directionsRenderer.setMap(this.map);
             },
             createRoute(route){
-                //приклад як може малюватись маршрут, не робочий
-                //винеси відмалювання маршруту в окрему функцію
                 this.directionsService.route({
                     origin: new google.maps.LatLng(route.from.lat, route.from.lng),
                     destination: new google.maps.LatLng(route.to.lat, route.to.lng),
                     travelMode: google.maps.DirectionsTravelMode.DRIVING
-                }, function (result) {
-                    let directionsRenderer = new google.maps.DirectionsRenderer();
-                    directionsRenderer.setMap(map);
-                    directionsRenderer.setDirections(result);
-                });
+                }, (result) => this.renderDirection(result));
+            },
+            renderDirection(direction){
+                this.directionsRenderer.setDirections(direction);
+            },
+            eraseRoutesFromMap(){
+                this.directionsRenderer.setDirections({routes:[]});  
             }
         }
     }

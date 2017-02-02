@@ -25,6 +25,9 @@
                     center: ukraine,
                     zoom: 8
                 });
+                this.initObjectsForMap();
+            },
+            initObjectsForMap(){
                 this.directionsService = new google.maps.DirectionsService();
                 this.directionsRenderer = new google.maps.DirectionsRenderer();
                 this.directionsRenderer.setMap(this.map);
